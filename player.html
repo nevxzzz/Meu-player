@@ -18,75 +18,115 @@
       --radius:  10px;
     }
 
-    html, body { height: 100%; background: var(--bg); color: var(--text);
+    html, body {
+      height: 100%; background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow: hidden; }
+      overflow: hidden;
+    }
 
     #app { display: flex; flex-direction: column; height: 100vh; }
 
     /* Header */
-    #header { display: flex; align-items: center; gap: 10px;
+    #header {
+      display: flex; align-items: center; gap: 10px;
       padding: 10px 14px; background: var(--surface);
-      border-bottom: 1px solid var(--border); flex-shrink: 0; min-height: 52px; }
+      border-bottom: 1px solid var(--border); flex-shrink: 0; min-height: 52px;
+      transition: all 0.3s;
+    }
     #header .logo { font-size: 20px; }
     #title-wrap { flex: 1; overflow: hidden; }
-    #media-title { font-size: 14px; font-weight: 700;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #media-title {
+      font-size: 14px; font-weight: 700;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
     #media-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-    #close-btn { background: none; border: none; color: var(--muted);
-      font-size: 22px; cursor: pointer; padding: 4px; line-height: 1; flex-shrink: 0; }
+    #close-btn {
+      background: none; border: none; color: var(--muted);
+      font-size: 22px; cursor: pointer; padding: 4px; line-height: 1; flex-shrink: 0;
+    }
+
+    /* Fullscreen btn no header */
+    #fs-btn {
+      background: none; border: none; color: var(--muted);
+      font-size: 18px; cursor: pointer; padding: 4px; line-height: 1; flex-shrink: 0;
+    }
 
     /* Player */
     #player-wrap { flex: 1; position: relative; background: #000; overflow: hidden; }
     #player-frame { width: 100%; height: 100%; border: none; display: block; }
 
     /* Loading */
-    #loading { position: absolute; inset: 0; display: flex; flex-direction: column;
+    #loading {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
       align-items: center; justify-content: center; background: #000;
-      gap: 16px; z-index: 10; transition: opacity 0.3s; }
+      gap: 16px; z-index: 10; transition: opacity 0.3s;
+    }
     #loading.hidden { opacity: 0; pointer-events: none; }
-    .spinner { width: 44px; height: 44px; border: 3px solid var(--border);
+    .spinner {
+      width: 44px; height: 44px; border: 3px solid var(--border);
       border-top-color: var(--accent); border-radius: 50%;
-      animation: spin 0.8s linear infinite; }
+      animation: spin 0.8s linear infinite;
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
     #loading-msg { color: var(--muted); font-size: 13px; text-align: center; padding: 0 20px; }
 
     /* Bottom bar */
-    #bottom-bar { background: var(--surface); border-top: 1px solid var(--border);
-      padding: 8px 12px; display: flex; gap: 8px; flex-shrink: 0; }
+    #bottom-bar {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 8px 12px; display: flex; gap: 8px; flex-shrink: 0;
+      transition: all 0.3s;
+    }
 
-    .provider-btn { flex: 1; padding: 10px 6px; border-radius: var(--radius);
+    .provider-btn {
+      flex: 1; padding: 10px 6px; border-radius: var(--radius);
       border: 1.5px solid var(--border); background: transparent;
       color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      gap: 5px; transition: all 0.2s; }
-    .provider-btn.active { border-color: var(--accent);
-      background: rgba(229,9,20,0.15); color: #fff; }
-    .provider-btn:not(.active):hover { border-color: #444;
-      background: rgba(255,255,255,0.05); }
-    .provider-dot { width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent); display: none; }
+      gap: 5px; transition: all 0.2s;
+    }
+    .provider-btn.active {
+      border-color: var(--accent);
+      background: rgba(229,9,20,0.15); color: #fff;
+    }
+    .provider-btn:not(.active):hover { border-color: #444; background: rgba(255,255,255,0.05); }
+    .provider-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: none; }
     .provider-btn.active .provider-dot { display: block; }
 
     /* Error */
-    #error-screen { display: none; position: absolute; inset: 0;
+    #error-screen {
+      display: none; position: absolute; inset: 0;
       flex-direction: column; align-items: center; justify-content: center;
-      background: #000; gap: 12px; padding: 24px; text-align: center; z-index: 20; }
+      background: #000; gap: 12px; padding: 24px; text-align: center; z-index: 20;
+    }
     #error-screen.visible { display: flex; }
     #error-screen .icon { font-size: 48px; }
     #error-screen h3 { font-size: 16px; }
     #error-screen p { font-size: 13px; color: var(--muted); }
-    #try-alt-btn { margin-top: 8px; padding: 10px 24px; background: var(--accent);
+    #try-alt-btn {
+      margin-top: 8px; padding: 10px 24px; background: var(--accent);
       color: #fff; border: none; border-radius: var(--radius);
-      font-size: 13px; font-weight: 700; cursor: pointer; }
+      font-size: 13px; font-weight: 700; cursor: pointer;
+    }
 
     /* Toast */
-    #toast { position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%);
+    #toast {
+      position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%);
       background: rgba(229,9,20,0.92); color: #fff; padding: 8px 16px;
       border-radius: 20px; font-size: 12px; font-weight: 600;
       opacity: 0; transition: opacity 0.4s; pointer-events: none;
-      white-space: nowrap; z-index: 30; }
+      white-space: nowrap; z-index: 30;
+    }
     #toast.show { opacity: 1; }
+
+    /* Fullscreen nativo do browser (fallback) */
+    #player-wrap:fullscreen,
+    #player-wrap:-webkit-full-screen {
+      width: 100vw; height: 100vh;
+    }
+    #player-wrap:fullscreen #player-frame,
+    #player-wrap:-webkit-full-screen #player-frame {
+      width: 100%; height: 100%;
+    }
   </style>
 </head>
 <body>
@@ -98,6 +138,7 @@
       <div id="media-title">Carregando…</div>
       <div id="media-sub"></div>
     </div>
+    <button id="fs-btn" title="Tela cheia" onclick="toggleFullscreen()">⛶</button>
     <button id="close-btn" title="Fechar">✕</button>
   </div>
 
@@ -162,7 +203,7 @@
   document.getElementById("media-title").textContent = title || "Player";
   document.getElementById("media-sub").textContent   = subInfo;
 
-  // ── Configuração dos providers ────────────────────────────────────
+  // ── Providers ─────────────────────────────────────────────────────
   const PROVIDERS = {
     warezcdn: {
       label: "WarezCDN",
@@ -185,6 +226,60 @@
   let autoFallbackDone = false;
   let loadTimer        = null;
   let activePingCtrl   = null;
+  let isFullscreen     = false;
+
+  // ── Fullscreen ────────────────────────────────────────────────────
+  function toggleFullscreen() {
+    // 1ª opção: API nativa do Telegram Mini App (mais confiável)
+    if (tg && tg.requestFullscreen) {
+      if (isFullscreen) {
+        tg.exitFullscreen?.();
+        isFullscreen = false;
+        document.getElementById("fs-btn").textContent = "⛶";
+      } else {
+        tg.requestFullscreen();
+        isFullscreen = true;
+        document.getElementById("fs-btn").textContent = "✕ Sair";
+      }
+      return;
+    }
+
+    // Fallback: fullscreen nativo do browser na div do player
+    const wrap = document.getElementById("player-wrap");
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      (wrap.requestFullscreen || wrap.webkitRequestFullscreen || wrap.mozRequestFullScreen).call(wrap);
+    } else {
+      (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+    }
+  }
+
+  // Atualiza ícone ao sair de fullscreen pelo gesto do sistema (ex: botão voltar)
+  document.addEventListener("fullscreenchange", () => {
+    const inFs = !!document.fullscreenElement;
+    document.getElementById("fs-btn").textContent = inFs ? "✕ Sair" : "⛶";
+  });
+  document.addEventListener("webkitfullscreenchange", () => {
+    const inFs = !!document.webkitFullscreenElement;
+    document.getElementById("fs-btn").textContent = inFs ? "✕ Sair" : "⛶";
+  });
+
+  // Escuta eventos do Telegram para sincronizar estado
+  if (tg) {
+    tg.onEvent?.("fullscreen_changed", (params) => {
+      isFullscreen = params?.is_fullscreen ?? false;
+      document.getElementById("fs-btn").textContent = isFullscreen ? "✕ Sair" : "⛶";
+    });
+  }
+
+  // Intercepta tentativa de fullscreen iniciada DENTRO do iframe
+  // (o player clica em fullscreen e o evento sobe para cá)
+  document.addEventListener("fullscreenchange", (e) => {
+    // Se o elemento em fullscreen for o iframe ou um elemento interno a ele,
+    // pedimos fullscreen do Mini App do Telegram também
+    if (document.fullscreenElement && tg?.requestFullscreen) {
+      tg.requestFullscreen();
+    }
+  });
 
   // ── UI helpers ────────────────────────────────────────────────────
   function showLoading(msg) {
@@ -212,91 +307,65 @@
   }
 
   // ── Ping heurístico ───────────────────────────────────────────────
-  // fetch no-cors sempre retorna opaque (status 0), não dá para ler status real.
-  // Heurística: um 404 da WarezCDN responde em < 500ms (redirect interno rápido).
-  // Um embed com conteúdo de verdade leva mais tempo pois carrega JS/CSS.
-  // Threshold conservador: 600ms. Abaixo disso = provavelmente 404.
-  const PING_FAST_THRESHOLD = 600; // ms
-  const PING_TIMEOUT        = 5000; // ms máximo de espera
+  const PING_FAST_THRESHOLD = 600;
+  const PING_TIMEOUT        = 5000;
 
   async function pingProvider(provider) {
     const url = PROVIDERS[provider].buildUrl();
     if (activePingCtrl) activePingCtrl.abort();
     activePingCtrl = new AbortController();
     const signal = activePingCtrl.signal;
-
     const timer = setTimeout(() => activePingCtrl.abort(), PING_TIMEOUT);
     try {
       const t0 = performance.now();
       await fetch(url, { method: "GET", mode: "no-cors", signal, cache: "no-store" });
       clearTimeout(timer);
-      const elapsed = performance.now() - t0;
-      // Rápido demais = 404 redirect imediato
-      return elapsed >= PING_FAST_THRESHOLD;
+      return (performance.now() - t0) >= PING_FAST_THRESHOLD;
     } catch (e) {
       clearTimeout(timer);
-      if (e.name === "AbortError") return null; // cancelado externamente
-      return false; // erro de rede = indisponível
+      if (e.name === "AbortError") return null;
+      return false;
     }
   }
 
-  // ── Carrega iframe diretamente ────────────────────────────────────
+  // ── Carrega iframe ────────────────────────────────────────────────
   function doLoadIframe(provider) {
     const url = PROVIDERS[provider].buildUrl();
     currentProvider = provider;
     setActiveBtn(provider);
     showLoading("Carregando player…");
     clearTimeout(loadTimer);
-
     document.getElementById("player-frame").src = url;
-
     loadTimer = setTimeout(() => {
       if (!document.getElementById("loading").classList.contains("hidden"))
         hideLoading();
     }, 15000);
   }
 
-  // ── Carrega com ping primeiro ─────────────────────────────────────
   async function loadPlayer(provider, skipPing) {
-    const url = PROVIDERS[provider].buildUrl();
-    if (!url || !tmdbId) { showError(); return; }
-
-    if (skipPing) {
-      doLoadIframe(provider);
-      return;
-    }
+    if (!tmdbId) { showError(); return; }
+    if (skipPing) { doLoadIframe(provider); return; }
 
     showLoading("Verificando disponibilidade…");
-
     const available = await pingProvider(provider);
-
-    if (available === null) return; // ping cancelado = outra operação assumiu
+    if (available === null) return;
 
     if (available === false && !autoFallbackDone) {
-      // Provider principal sem conteúdo → tenta o alternativo automaticamente
       const other = provider === "warezcdn" ? "superflix" : "warezcdn";
       autoFallbackDone = true;
       showToast(`⚠️ ${PROVIDERS[provider].label} indisponível — tentando ${PROVIDERS[other].label}…`);
       doLoadIframe(other);
       return;
     }
-
-    if (available === false && autoFallbackDone) {
-      // Ambos falharam
-      showError();
-      return;
-    }
-
-    // available === true → carrega normalmente
+    if (available === false && autoFallbackDone) { showError(); return; }
     doLoadIframe(provider);
   }
 
-  // ── Troca manual de provider ──────────────────────────────────────
   function switchProvider(provider) {
     if (provider === currentProvider) return;
-    autoFallbackDone = true; // troca manual = usuário escolheu, desativa auto-fallback
+    autoFallbackDone = true;
     if (activePingCtrl) activePingCtrl.abort();
-    loadPlayer(provider, true); // skip ping na troca manual
+    loadPlayer(provider, true);
   }
 
   // ── Eventos ───────────────────────────────────────────────────────
@@ -315,7 +384,7 @@
     if (tg) tg.close();
   });
 
-  // ── Inicializar ───────────────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────
   if (tmdbId) {
     loadPlayer("warezcdn", false);
   } else {
